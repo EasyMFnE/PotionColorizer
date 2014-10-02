@@ -6,9 +6,9 @@
  * Software Foundation, either version 3 of the License, or (at your option) any
  * later version.
  * 
- * PotionColorizer is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * PotionColorizer is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
  * 
  * You should have received a copy of the GNU General Public License along with
@@ -90,8 +90,9 @@ public class PotionColorizerConfigPanel extends Gui implements ConfigPanel {
                         .setText(colorToHex(LiteModPotionColorizer.instance.customPotionColors
                                 .get(potionName)));
             } else {
-                textField.setText(colorToHex(LiteModPotionColorizer.defaultColors
-                        .get(potionName)));
+                textField
+                        .setText(colorToHex(LiteModPotionColorizer.defaultColors
+                                .get(potionName)));
             }
             label = I18n.format(potionName, new Object[0]);
         }
@@ -228,23 +229,24 @@ public class PotionColorizerConfigPanel extends Gui implements ConfigPanel {
     @Override
     public void mousePressed(ConfigPanelHost host, int mouseX, int mouseY,
             int mouseButton) {
-        if (deglintBox.mousePressed(Minecraft.getMinecraft(), mouseX,
-                mouseY)) {
+        if (deglintBox.mousePressed(Minecraft.getMinecraft(), mouseX, mouseY)) {
             activeButton = deglintBox;
             LiteModPotionColorizer.instance.deglintPotions =
                     !LiteModPotionColorizer.instance.deglintPotions;
             deglintBox.checked = LiteModPotionColorizer.instance.deglintPotions;
-        } else if (recolorBox.mousePressed(Minecraft.getMinecraft(), mouseX, mouseY)) {
+        } else if (recolorBox.mousePressed(Minecraft.getMinecraft(), mouseX,
+                mouseY)) {
             activeButton = recolorBox;
             LiteModPotionColorizer.instance.recolorPotions =
                     !LiteModPotionColorizer.instance.recolorPotions;
             recolorBox.checked = LiteModPotionColorizer.instance.recolorPotions;
-        } else if (customColorBox.mousePressed(Minecraft.getMinecraft(), mouseX,
-                mouseY)) {
+        } else if (customColorBox.mousePressed(Minecraft.getMinecraft(),
+                mouseX, mouseY)) {
             activeButton = customColorBox;
             LiteModPotionColorizer.instance.customColors =
                     !LiteModPotionColorizer.instance.customColors;
-            customColorBox.checked = LiteModPotionColorizer.instance.customColors;
+            customColorBox.checked =
+                    LiteModPotionColorizer.instance.customColors;
             for (ColorConfigLine line : colorLines) {
                 line.refresh();
             }
@@ -293,7 +295,9 @@ public class PotionColorizerConfigPanel extends Gui implements ConfigPanel {
                 new GuiCheckbox(id++, 10, SPACING * line++, I18n.format(
                         "config.recolor.text", new Object[0]));
         recolorBox.checked = LiteModPotionColorizer.instance.recolorPotions;
-        customColorBox = new GuiCheckbox(id++, 10, SPACING * line++, I18n.format("config.custom.text", new Object[0]));
+        customColorBox =
+                new GuiCheckbox(id++, 10, SPACING * line++, I18n.format(
+                        "config.custom.text", new Object[0]));
         customColorBox.checked = LiteModPotionColorizer.instance.customColors;
         colorLines = new ArrayList<ColorConfigLine>();
         for (Potion potion : Potion.potionTypes) {

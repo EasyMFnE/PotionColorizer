@@ -6,9 +6,9 @@
  * Software Foundation, either version 3 of the License, or (at your option) any
  * later version.
  * 
- * PotionColorizer is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * PotionColorizer is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
  * 
  * You should have received a copy of the GNU General Public License along with
@@ -58,7 +58,8 @@ public class PotionColorizerEventTransformer extends EventInjectionTransformer {
     private void addRecolorEvent() {
         addEvent(
                 Event.getOrCreate(
-                        "PotionColorizer_ItemPotion_getColorFromItemStack", true),
+                        "PotionColorizer_ItemPotion_getColorFromItemStack",
+                        true),
                 new MethodInfo(PotionObf.itemPotion,
                         PotionObf.itemPotion_getColorFromItemStack,
                         Integer.TYPE, new Object[] { ItemStack.class,

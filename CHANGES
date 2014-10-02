@@ -1,3 +1,6 @@
+[2014-10-02] v1.0.1
+    - Fix for compatibility with Forge and deobfuscated clients.
+
 [2014-09-30] v1.0.0
     - Configuration panel now allows customization of potion colors.
 

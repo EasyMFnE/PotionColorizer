@@ -6,9 +6,9 @@
  * Software Foundation, either version 3 of the License, or (at your option) any
  * later version.
  * 
- * PotionColorizer is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * PotionColorizer is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
  * 
  * You should have received a copy of the GNU General Public License along with
@@ -55,7 +55,9 @@ public class LiteModPotionColorizer implements LiteMod, InitCompleteListener,
     
     /** Name/Version information. */
     public static final String MOD_NAME = "PotionColorizer";
-    public static final String MOD_VERSION = "1.0.0";
+    public static final String MOD_VERSION = "1.0.1";
+    
+    private static final int JUMP_BOOST_COLOR_1_8 = 2293580;
     
     /** Modification instance. */
     public static LiteModPotionColorizer instance;
@@ -161,7 +163,7 @@ public class LiteModPotionColorizer implements LiteMod, InitCompleteListener,
                         Integer.valueOf(potion.getLiquidColor()));
             }
         }
-        defaultColors.put(Potion.jump.getName(), 2293580);
+        defaultColors.put(Potion.jump.getName(), JUMP_BOOST_COLOR_1_8);
         LiteLoaderLogger.info("Saved %d default potion liquid colors.",
                 defaultColors.size());
     }
@@ -188,19 +190,44 @@ public class LiteModPotionColorizer implements LiteMod, InitCompleteListener,
      * color is not defined, reset its current color to the default if
      * necessary.
      * 
-     * @throws IllegalArgumentException
-     *             If a potion does not have a liquid color field.
      * @throws IllegalAccessException
      *             If a potion does not have an accessible liquid color field.
      * @throws NoSuchFieldException
      *             If the Potion class does not have the liquid color field.
-     * @throws SecurityException
-     *             If a security manager prevents access to liquid color field.
      */
-    private void setPotionColors() throws IllegalArgumentException,
-            IllegalAccessException, NoSuchFieldException, SecurityException {
-        Field f =
-                Potion.class.getDeclaredField(PotionObf.potion_liquidColor.obf);
+    private void setPotionColors() throws NoSuchFieldException,
+            IllegalAccessException {
+        for (int i = 0; i < PotionObf.potion_liquidColor.names.length; i++) {
+            try {
+                setPotionColors(PotionObf.potion_liquidColor.names[i]);
+                return;
+            } catch (NoSuchFieldException e) {
+                if (i == PotionObf.potion_liquidColor.names.length - 1) {
+                    throw e;
+                }
+            } catch (IllegalAccessException e) {
+                if (i == PotionObf.potion_liquidColor.names.length - 1) {
+                    throw e;
+                }
+            }
+        }
+    }
+    
+    /**
+     * Using reflection, modify potion colors to custom values via the given
+     * field name. If a custom color is not defined, reset its current color to
+     * the default if necessary.
+     * 
+     * @param fieldName
+     *            The name of the liquid color field.
+     * @throws IllegalAccessException
+     *             If a potion does not have an accessible field of that name.
+     * @throws NoSuchFieldException
+     *             If the Potion class does not have a field of that name.
+     */
+    private void setPotionColors(String fieldName) throws NoSuchFieldException,
+            IllegalAccessException {
+        Field f = Potion.class.getDeclaredField(fieldName);
         boolean accessibility = f.isAccessible();
         f.setAccessible(true);
         for (Potion potion : Potion.potionTypes) {
