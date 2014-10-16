@@ -4,6 +4,10 @@
 #################################################################
 
 config.panel.title=%s Settings
+
 config.deglint.text=Remove the glint overlay from potions.
 config.recolor.text=Recolor potions based on their effects.
 config.custom.text=Enable custom potion effect colors.
+
+config.picker.ok=OK
+config.picker.cancel=Cancel

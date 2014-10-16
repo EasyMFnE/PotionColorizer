@@ -4,7 +4,7 @@
 [Bug Report](https://github.com/EasyMFnE/PotionColorizer/issues) |
 [Donate](https://www.paypal.com/cgi-bin/webscr?hosted_button_id=457RX2KYUDY5G&item_name=PotionColorizer&cmd=_s-xclick)</center>
 
-<center>**Latest Version:** v1.0.1 for mc1.7.10</center>
+<center>**Latest Version:** v1.1.0 for mc1.7.10</center>
 
 ## About ##
 

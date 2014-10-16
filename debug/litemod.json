@@ -1,0 +1,8 @@
+{
+    "name": "PotionColorizer",
+    "mcversion": "1.7.10",
+    "revision": "DEBUG",
+    "author": "EasyMFnE",
+    "description": "Recolor the potion overlays to match the actual potion effects and allow customization of effect colors.",
+    "classTransformerClasses": "net.easymfne.potioncolorizer.PotionColorizerEventTransformer"
+}
