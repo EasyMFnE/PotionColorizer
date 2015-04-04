@@ -210,7 +210,7 @@ public class GuiConfigPanel extends Gui implements ConfigPanel {
   @Override
   public void mouseReleased(ConfigPanelHost host, int mouseX, int mouseY, int mouseButton) {
     if (activeButton != null) {
-      activeButton.func_146111_b(mouseX, mouseY);
+      activeButton.mouseReleased(mouseX, mouseY);
       if (activeButton instanceof GuiControl) {
         ((GuiControl) activeButton).mouseReleased(mouseX, mouseY);
       }

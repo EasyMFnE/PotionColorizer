@@ -51,9 +51,7 @@ public class LiteModPotionColorizer implements LiteMod, InitCompleteListener, Co
 
   /** Name/Version information. */
   public static final String MOD_NAME = "PotionColorizer";
-  public static final String MOD_VERSION = "1.1.0";
-
-  private static final int JUMP_BOOST_COLOR_1_8 = 2293580; // TODO: Remove in 1.8 release.
+  public static final String MOD_VERSION = "1.1.1";
 
   /** Modification instance. */
   public static LiteModPotionColorizer instance;
@@ -152,7 +150,6 @@ public class LiteModPotionColorizer implements LiteMod, InitCompleteListener, Co
         defaultColors.put(potion.getName(), Integer.valueOf(potion.getLiquidColor()));
       }
     }
-    defaultColors.put(Potion.jump.getName(), JUMP_BOOST_COLOR_1_8);
     LiteLoaderLogger.info("Saved %d default potion liquid colors.", defaultColors.size());
     try {
       setPotionColors();

@@ -36,6 +36,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
 
 /**
  * GuiControlEx is the base class for additional controls. It includes some advanced drawing methods
@@ -196,10 +197,11 @@ public class GuiControl extends GuiButton {
     glColor4f(f1, f2, f3, f);
     glLineWidth(width);
 
-    Tessellator tessellator = Tessellator.instance;
-    tessellator.startDrawing(GL_LINES);
-    tessellator.addVertex(x1, y1, 0);
-    tessellator.addVertex(x2, y2, 0);
+    Tessellator tessellator = Tessellator.getInstance();
+    WorldRenderer renderer = tessellator.getWorldRenderer();
+    renderer.startDrawing(GL_LINES);
+    renderer.addVertex(x1, y1, 0);
+    renderer.addVertex(x2, y2, 0);
     tessellator.draw();
 
     glEnable(GL_TEXTURE_2D);
@@ -264,20 +266,21 @@ public class GuiControl extends GuiButton {
     glColor4f(f1, f2, f3, f);
 
     // Draw the line
-    Tessellator tessellator = Tessellator.instance;
-    tessellator.startDrawingQuads();
-    tessellator.addVertex(x1, y2, z);
-    tessellator.addVertex(x2, y2, z);
-    tessellator.addVertex(x2, y1, z);
-    tessellator.addVertex(x1, y1, z);
+    Tessellator tessellator = Tessellator.getInstance();
+    WorldRenderer renderer = tessellator.getWorldRenderer();
+    renderer.startDrawingQuads();
+    renderer.addVertex(x1, y2, z);
+    renderer.addVertex(x2, y2, z);
+    renderer.addVertex(x2, y1, z);
+    renderer.addVertex(x1, y1, z);
     tessellator.draw();
 
     // If an arrow then draw the arrow head
     if (arrowHead && arrowHeadSize > 0) {
-      tessellator.startDrawing(4);
-      tessellator.addVertex(x2, 0 - arrowHeadSize / 2, z);
-      tessellator.addVertex(x2, arrowHeadSize / 2, z);
-      tessellator.addVertex(length, 0, z);
+    	renderer.startDrawing(4);
+    	renderer.addVertex(x2, 0 - arrowHeadSize / 2, z);
+    	renderer.addVertex(x2, arrowHeadSize / 2, z);
+    	renderer.addVertex(length, 0, z);
       tessellator.draw();
     }
 
@@ -311,15 +314,16 @@ public class GuiControl extends GuiButton {
    */
   @SuppressWarnings("cast")
   public void drawTexturedModalRectRot(int x, int y, int x2, int y2, int u, int v, int u2, int v2) {
-    Tessellator tessellator = Tessellator.instance;
-    tessellator.startDrawingQuads();
-    tessellator.addVertexWithUV(x2, y2, this.zLevel, (float) (u) * texMapScale, (float) (v2)
+    Tessellator tessellator = Tessellator.getInstance();
+    WorldRenderer renderer = tessellator.getWorldRenderer();
+    renderer.startDrawingQuads();
+    renderer.addVertexWithUV(x2, y2, this.zLevel, (float) (u) * texMapScale, (float) (v2)
         * texMapScale);
-    tessellator.addVertexWithUV(x2, y, this.zLevel, (float) (u2) * texMapScale, (float) (v2)
+    renderer.addVertexWithUV(x2, y, this.zLevel, (float) (u2) * texMapScale, (float) (v2)
         * texMapScale);
-    tessellator.addVertexWithUV(x, y, this.zLevel, (float) (u2) * texMapScale, (float) (v)
+    renderer.addVertexWithUV(x, y, this.zLevel, (float) (u2) * texMapScale, (float) (v)
         * texMapScale);
-    tessellator.addVertexWithUV(x, y2, this.zLevel, (float) (u) * texMapScale, (float) (v)
+    renderer.addVertexWithUV(x, y2, this.zLevel, (float) (u) * texMapScale, (float) (v)
         * texMapScale);
     tessellator.draw();
   }
@@ -336,15 +340,16 @@ public class GuiControl extends GuiButton {
    */
   @SuppressWarnings("cast")
   public void drawTexturedModalRectRot(int x, int y, int u, int v, int width, int height) {
-    Tessellator tessellator = Tessellator.instance;
-    tessellator.startDrawingQuads();
-    tessellator.addVertexWithUV(x + height, y + width, this.zLevel, (float) (u) * texMapScale,
+    Tessellator tessellator = Tessellator.getInstance();
+    WorldRenderer renderer = tessellator.getWorldRenderer();
+    renderer.startDrawingQuads();
+    renderer.addVertexWithUV(x + height, y + width, this.zLevel, (float) (u) * texMapScale,
         (float) (v + height) * texMapScale);
-    tessellator.addVertexWithUV(x + height, y, this.zLevel, (float) (u + width) * texMapScale,
+    renderer.addVertexWithUV(x + height, y, this.zLevel, (float) (u + width) * texMapScale,
         (float) (v + height) * texMapScale);
-    tessellator.addVertexWithUV(x, y, this.zLevel, (float) (u + width) * texMapScale, (float) (v)
+    renderer.addVertexWithUV(x, y, this.zLevel, (float) (u + width) * texMapScale, (float) (v)
         * texMapScale);
-    tessellator.addVertexWithUV(x, y + width, this.zLevel, (float) (u) * texMapScale, (float) (v)
+    renderer.addVertexWithUV(x, y + width, this.zLevel, (float) (u) * texMapScale, (float) (v)
         * texMapScale);
     tessellator.draw();
   }
@@ -494,16 +499,17 @@ public class GuiControl extends GuiButton {
     glLogicOp(GL_OR_REVERSE);
 
     // Draw the frame
-    Tessellator tessellator = Tessellator.instance;
-
-    tessellator.startDrawing(GL_LINES);
-    tessellator.addVertex(x - size, y, 0);
-    tessellator.addVertex(x + size, y, 0);
+    Tessellator tessellator = Tessellator.getInstance();
+    WorldRenderer renderer = tessellator.getWorldRenderer();
+    
+    renderer.startDrawing(GL_LINES);
+    renderer.addVertex(x - size, y, 0);
+    renderer.addVertex(x + size, y, 0);
     tessellator.draw();
 
-    tessellator.startDrawing(GL_LINES);
-    tessellator.addVertex(x, y - size, 0);
-    tessellator.addVertex(x, y + size, 0);
+    renderer.startDrawing(GL_LINES);
+    renderer.addVertex(x, y - size, 0);
+    renderer.addVertex(x, y + size, 0);
     tessellator.draw();
 
     glDisable(GL_COLOR_LOGIC_OP);
@@ -570,15 +576,16 @@ public class GuiControl extends GuiButton {
    */
   @SuppressWarnings("cast")
   public void drawTexturedModalRect(int x, int y, int x2, int y2, int u, int v, int u2, int v2) {
-    Tessellator tessellator = Tessellator.instance;
-    tessellator.startDrawingQuads();
-    tessellator.addVertexWithUV(x, y2, this.zLevel, (float) (u) * texMapScale, (float) (v2)
+    Tessellator tessellator = Tessellator.getInstance();
+    WorldRenderer renderer = tessellator.getWorldRenderer();
+    renderer.startDrawingQuads();
+    renderer.addVertexWithUV(x, y2, this.zLevel, (float) (u) * texMapScale, (float) (v2)
         * texMapScale);
-    tessellator.addVertexWithUV(x2, y2, this.zLevel, (float) (u2) * texMapScale, (float) (v2)
+    renderer.addVertexWithUV(x2, y2, this.zLevel, (float) (u2) * texMapScale, (float) (v2)
         * texMapScale);
-    tessellator.addVertexWithUV(x2, y, this.zLevel, (float) (u2) * texMapScale, (float) (v)
+    renderer.addVertexWithUV(x2, y, this.zLevel, (float) (u2) * texMapScale, (float) (v)
         * texMapScale);
-    tessellator.addVertexWithUV(x, y, this.zLevel, (float) (u) * texMapScale, (float) (v)
+    renderer.addVertexWithUV(x, y, this.zLevel, (float) (u) * texMapScale, (float) (v)
         * texMapScale);
     tessellator.draw();
   }
@@ -597,12 +604,13 @@ public class GuiControl extends GuiButton {
    */
   public void drawTexturedModalRectF(int x, int y, int x2, int y2, float u, float v, float u2,
       float v2) {
-    Tessellator tessellator = Tessellator.instance;
-    tessellator.startDrawingQuads();
-    tessellator.addVertexWithUV(x, y2, this.zLevel, u, v2);
-    tessellator.addVertexWithUV(x2, y2, this.zLevel, u2, v2);
-    tessellator.addVertexWithUV(x2, y, this.zLevel, u2, v);
-    tessellator.addVertexWithUV(x, y, this.zLevel, u, v);
+    Tessellator tessellator = Tessellator.getInstance();
+    WorldRenderer renderer = tessellator.getWorldRenderer();
+    renderer.startDrawingQuads();
+    renderer.addVertexWithUV(x, y2, this.zLevel, u, v2);
+    renderer.addVertexWithUV(x2, y2, this.zLevel, u2, v2);
+    renderer.addVertexWithUV(x2, y, this.zLevel, u2, v);
+    renderer.addVertexWithUV(x, y, this.zLevel, u, v);
     tessellator.draw();
   }
 
@@ -620,15 +628,16 @@ public class GuiControl extends GuiButton {
   @SuppressWarnings("cast")
   public void drawTexturedModalRect(int x, int y, int u, int v, int width, int height,
       float texMapScale) {
-    Tessellator tessellator = Tessellator.instance;
-    tessellator.startDrawingQuads();
-    tessellator.addVertexWithUV(x + 0, y + height, this.zLevel, (float) (u + 0) * texMapScale,
+    Tessellator tessellator = Tessellator.getInstance();
+    WorldRenderer renderer = tessellator.getWorldRenderer();
+    renderer.startDrawingQuads();
+    renderer.addVertexWithUV(x + 0, y + height, this.zLevel, (float) (u + 0) * texMapScale,
         (float) (v + height) * texMapScale);
-    tessellator.addVertexWithUV(x + width, y + height, this.zLevel, (float) (u + width)
+    renderer.addVertexWithUV(x + width, y + height, this.zLevel, (float) (u + width)
         * texMapScale, (float) (v + height) * texMapScale);
-    tessellator.addVertexWithUV(x + width, y + 0, this.zLevel, (float) (u + width) * texMapScale,
+    renderer.addVertexWithUV(x + width, y + 0, this.zLevel, (float) (u + width) * texMapScale,
         (float) (v + 0) * texMapScale);
-    tessellator.addVertexWithUV(x + 0, y + 0, this.zLevel, (float) (u + 0) * texMapScale,
+    renderer.addVertexWithUV(x + 0, y + 0, this.zLevel, (float) (u + 0) * texMapScale,
         (float) (v + 0) * texMapScale);
     tessellator.draw();
   }

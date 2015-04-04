@@ -71,11 +71,11 @@ public class GuiColorPicker extends GuiControl {
 
     this.fontRenderer = minecraft.fontRendererObj;
     this.txtRed =
-        new GuiTextField(this.fontRenderer, this.xPosition + 163, this.yPosition + 10, 32, 16);
+        new GuiTextField(0, this.fontRenderer, this.xPosition + 163, this.yPosition + 10, 32, 16);
     this.txtGreen =
-        new GuiTextField(this.fontRenderer, this.xPosition + 163, this.yPosition + 30, 32, 16);
+        new GuiTextField(0, this.fontRenderer, this.xPosition + 163, this.yPosition + 30, 32, 16);
     this.txtBlue =
-        new GuiTextField(this.fontRenderer, this.xPosition + 163, this.yPosition + 50, 32, 16);
+        new GuiTextField(0, this.fontRenderer, this.xPosition + 163, this.yPosition + 50, 32, 16);
 
     this.txtRed.setMaxStringLength(3);
     this.txtGreen.setMaxStringLength(3);

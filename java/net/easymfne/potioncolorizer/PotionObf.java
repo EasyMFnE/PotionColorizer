@@ -23,17 +23,17 @@ import com.mumfrey.liteloader.core.runtime.Obf;
 public class PotionObf extends Obf {
 
   /** net.minecraft.item.ItemPotion class. */
-  public static PotionObf itemPotion = new PotionObf("net.minecraft.item.ItemPotion", "adp");
+  public static PotionObf itemPotion = new PotionObf("net.minecraft.item.ItemPotion", "amw");
 
   /** getColorFromItemStack(ItemStack, int) method from ItemPotion. */
   public static PotionObf itemPotion_getColorFromItemStack = new PotionObf("func_82790_a", "a",
       "getColorFromItemStack");
 
   /** hasEffect(ItemStack) method from ItemPotion. */
-  public static PotionObf itemPotion_hasEffect = new PotionObf("func_77636_d", "e", "hasEffect");
+  public static PotionObf itemPotion_hasEffect = new PotionObf("func_77636_d", "f", "hasEffect");
 
   /** liquidColor field in net.minecraft.potion.Potion class. */
-  public static PotionObf potion_liquidColor = new PotionObf("field_76414_N", "K", "liquidColor");
+  public static PotionObf potion_liquidColor = new PotionObf("field_76414_N", "L", "liquidColor");
 
   /**
    * Create a new obfuscation mapping.
